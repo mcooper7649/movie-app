@@ -21,14 +21,15 @@
   display: flex;
   justify-content: center;
   font-family: 'Montserrat', sans-serif;
-  font-size: 2vw;
-  padding: 4px;
+  font-size: 4vw;
   border-radius: 50px;
   color: white;
+  padding-top: 15%;
 }
 
 @media (max-width: 1000px) {
   .pageTitle {
     font-size: 6.4vw;
+    padding-top: 20%;
   }
 }

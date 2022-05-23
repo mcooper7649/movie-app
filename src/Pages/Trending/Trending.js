@@ -1,8 +1,8 @@
 import axios from 'axios';
-import React, { useState, useEffect } from 'react';
+import './Trending.css';
+import { useEffect, useState, Fragment } from 'react';
 import SingleContent from '../../components/SingleContent/SingleContent';
 import CustomPagination from '../../components/Pagination/CustomPagination';
-import './Trending.css';
 
 const Trending = () => {
   const [page, setPage] = useState(1);
@@ -23,8 +23,8 @@ const Trending = () => {
   }, [page]);
 
   return (
-    <div>
-      <span className="pageTitle">Trending</span>
+    <Fragment>
+      <span className="pageTitle">Trending Today</span>
       <div className="trending">
         {content &&
           content.map((c) => (
@@ -40,7 +40,7 @@ const Trending = () => {
           ))}
       </div>
       <CustomPagination setPage={setPage} />
-    </div>
+    </Fragment>
   );
 };
 
