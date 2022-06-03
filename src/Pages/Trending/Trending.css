@@ -4,3 +4,8 @@
   justify-content: space-around;
   /* margin-top: 8%; */
 }
+
+.MuiBadge-badge {
+  font-size: 0.9rem !important;
+  font-weight: 900 !important;
+}

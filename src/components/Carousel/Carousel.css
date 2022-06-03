@@ -7,5 +7,6 @@
 .carouselItem__img {
   border-radius: 10px;
   margin-bottom: 5px;
+  width: 6vw;
   box-shadow: 0px 0px 5px black;
 }
