@@ -12,7 +12,15 @@
 }
 
 .media:hover {
-  background-color: antiquewhite;
+  background-color: wheat;
+  /* color: black; */
+}
+
+.media:hover .title {
+  color: black;
+}
+
+.media:hover .subTitle {
   color: black;
 }
 
@@ -31,7 +39,7 @@
   text-align: center;
   font-size: 17px;
   padding: 8px 0;
-  color: black;
+  color: wheat;
 }
 
 .subTitle {
@@ -40,5 +48,5 @@
   padding-bottom: 3px;
   padding: 0 2px;
   padding-bottom: 3px;
-  color: black;
+  color: whitesmoke;
 }
