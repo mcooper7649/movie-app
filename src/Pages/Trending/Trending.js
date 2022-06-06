@@ -4,6 +4,8 @@ import { useEffect, useState, Fragment } from 'react';
 import SingleContent from '../../components/SingleContent/SingleContent';
 import CustomPagination from '../../components/Pagination/CustomPagination';
 
+import { Helmet } from 'react-helmet-async';
+
 const Trending = () => {
   const [page, setPage] = useState(1);
   const [content, setContent] = useState([]);
@@ -22,8 +24,13 @@ const Trending = () => {
     // eslint-disable-next-line
   }, [page]);
 
+  console.log(content);
   return (
     <Fragment>
+      <Helmet>
+        <title>Trending</title>
+        <link rel="canonical" href="https://www.mycodedojo.com/" />
+      </Helmet>
       <span className="pageTitle">Trending Today</span>
       <div className="trending">
         {content &&
