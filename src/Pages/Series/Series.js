@@ -5,6 +5,7 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import CustomPagination from '../../components/Pagination/CustomPagination';
 import useGenre from '../../hooks/useGenre';
+import { Helmet } from 'react-helmet-async';
 
 const Series = () => {
   const [genres, setGenres] = useState([]);
@@ -30,6 +31,10 @@ const Series = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>TV Series</title>
+        <link rel="canonical" href="https://www.mycodedojo.com/" />
+      </Helmet>
       <span className="pageTitle">Discover TV Series</span>
       <Genres
         type="tv"

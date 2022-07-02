@@ -4,6 +4,7 @@ import Genres from '../../components/Genres';
 import SingleContent from '../../components/SingleContent/SingleContent';
 import useGenre from '../../hooks/useGenre';
 import CustomPagination from '../../components/Pagination/CustomPagination';
+import { Helmet } from 'react-helmet-async';
 
 const Movies = () => {
   const [genres, setGenres] = useState([]);
@@ -30,6 +31,10 @@ const Movies = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Movies</title>
+        <link rel="canonical" href="https://www.mycodedojo.com/" />
+      </Helmet>
       <span className="pageTitle">Discover Movies</span>
       <Genres
         type="movie"

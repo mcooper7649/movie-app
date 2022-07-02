@@ -12,6 +12,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import CustomPagination from '../../components/Pagination/CustomPagination';
 import SingleContent from '../../components/SingleContent/SingleContent';
+import { Helmet } from 'react-helmet-async';
 
 const Search = () => {
   const [type, setType] = useState(0);
@@ -52,6 +53,10 @@ const Search = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Search</title>
+        <link rel="canonical" href="https://www.mycodedojo.com/" />
+      </Helmet>
       <ThemeProvider theme={darkTheme}>
         <div className="search">
           <TextField
