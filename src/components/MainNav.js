@@ -5,10 +5,11 @@ import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import TvIcon from '@material-ui/icons/Tv';
 import MovieIcon from '@material-ui/icons/Movie';
 import SearchIcon from '@material-ui/icons/Search';
-import WhatshotIcon from '@material-ui/icons/Whatshot';
 import LoginIcon from '@mui/icons-material/Login';
+import WhatshotIcon from '@material-ui/icons/Whatshot';
 import { useHistory } from 'react-router-dom';
-import AuthModal from '../components/Authentication/AuthModal';
+import AuthModal from './Authentication/AuthModal';
+import { UserState } from '../UserContext';
 
 const useStyles = makeStyles({
   root: {
@@ -24,6 +25,7 @@ export default function SimpleBottomNavigation() {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
   const history = useHistory();
+  const { user } = UserState();
 
   useEffect(() => {
     if (value === 0) {
@@ -34,8 +36,6 @@ export default function SimpleBottomNavigation() {
       history.push('/series');
     } else if (value === 3) {
       history.push('/search');
-    } else if (value === 4) {
-      history.push('/login');
     }
   }, [value, history]);
 
@@ -68,13 +68,23 @@ export default function SimpleBottomNavigation() {
         label="Search"
         icon={<SearchIcon />}
       />
-      <BottomNavigationAction
+      {user ? (
+        <BottomNavigationAction
+          style={{ color: 'white' }}
+          label="Log Out"
+          icon={<LoginIcon />}
+        >
+          Logged In
+        </BottomNavigationAction>
+      ) : (
+        <AuthModal />
+      )}
+      {/* <BottomNavigationAction
         style={{ color: 'white' }}
         label="Login"
         icon={<LoginIcon />}
-      >
-        <AuthModal />
-      </BottomNavigationAction>
+        onClick={fireAuth}
+      /> */}
     </BottomNavigation>
   );
 }
