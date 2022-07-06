@@ -18,7 +18,6 @@ import Checkbox from '@material-ui/core/Checkbox';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
-import FormLabel from '@material-ui/core/FormLabel';
 
 const Search = () => {
   const [type, setType] = useState(0);
@@ -100,18 +99,19 @@ const Search = () => {
         >
           <Tab style={{ width: '50%' }} label="Search Movies" />
           <Tab style={{ width: '50%' }} label="Search TV Series" />
-          <FormControl component="fieldset">
-            {/* <FormLabel component="legend">Search Options</FormLabel> */}
-            <FormGroup aria-label="position" row>
-              <FormControlLabel
-                control={<Checkbox color="primary" />}
-                label="Include Adult Content"
-                labelPlacement="bottom"
-                onChange={handleChange}
-              />
-            </FormGroup>
-          </FormControl>
         </Tabs>
+        <FormControl component="fieldset">
+          {/* <FormLabel component="legend">Search Options</FormLabel> */}
+          <FormGroup aria-label="position" row>
+            <FormControlLabel
+              control={<Checkbox color="primary" />}
+              label="Include Adult Content"
+              labelPlacement="top"
+              style={{ color: 'white' }}
+              onChange={handleChange}
+            />
+          </FormGroup>
+        </FormControl>
       </ThemeProvider>
 
       <div className="trending">

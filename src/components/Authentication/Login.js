@@ -66,7 +66,11 @@ const Login = ({ handleClose }) => {
       <Button
         variant="contained"
         size="large"
-        style={{ backgroundColor: '#83b6ec' }}
+        style={{
+          backgroundColor: '#83b6ec',
+          color: 'white',
+          fontWeight: 'bold',
+        }}
         onClick={handleSubmit}
       >
         Login

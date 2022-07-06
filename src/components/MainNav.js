@@ -10,6 +10,7 @@ import WhatshotIcon from '@material-ui/icons/Whatshot';
 import { useHistory } from 'react-router-dom';
 import AuthModal from './Authentication/AuthModal';
 import { UserState } from '../UserContext';
+import UserSideBar from './Authentication/UserSideBar';
 
 const useStyles = makeStyles({
   root: {
@@ -68,23 +69,7 @@ export default function SimpleBottomNavigation() {
         label="Search"
         icon={<SearchIcon />}
       />
-      {user ? (
-        <BottomNavigationAction
-          style={{ color: 'white' }}
-          label="Log Out"
-          icon={<LoginIcon />}
-        >
-          Logged In
-        </BottomNavigationAction>
-      ) : (
-        <AuthModal />
-      )}
-      {/* <BottomNavigationAction
-        style={{ color: 'white' }}
-        label="Login"
-        icon={<LoginIcon />}
-        onClick={fireAuth}
-      /> */}
+      {user ? <UserSideBar /> : <AuthModal />}
     </BottomNavigation>
   );
 }

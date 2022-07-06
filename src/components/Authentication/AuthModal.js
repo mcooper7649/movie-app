@@ -18,9 +18,9 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
   },
   paper: {
-    width: 320,
-    backgroundColor: theme.palette.background.paper,
-    color: 'grey',
+    width: 400,
+    backgroundColor: theme.palette.grey[100],
+    color: theme.palette.grey[500],
     borderRadius: 10,
   },
   google: {
@@ -105,7 +105,13 @@ export default function AuthModal() {
       >
         <Fade in={open}>
           <div className={classes.paper}>
-            <AppBar position="static">
+            <AppBar
+              position="static"
+              style={{
+                borderTopLeftRadius: 10,
+                borderTopRightRadius: 10,
+              }}
+            >
               <Tabs
                 value={value}
                 onChange={handleChange}

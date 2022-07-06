@@ -14,6 +14,10 @@ import { Button } from '@material-ui/core';
 import YouTubeIcon from '@material-ui/icons/YouTube';
 import Carousel from '../Carousel/Carousel';
 
+import { UserState } from '../../UserContext';
+import { doc, setDoc } from 'firebase/firestore';
+import { db } from '../../firebase';
+
 const useStyles = makeStyles((theme) => ({
   modal: {
     display: 'flex',
@@ -36,7 +40,56 @@ export default function ContentModal({ children, media_type, id }) {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [content, setContent] = useState();
-  const [video, setVideo] = useState();
+  const [movie, setMovie] = useState();
+
+  const { user, watchlist, setAlert } = UserState();
+  const inWatchlist = watchlist.includes(content?.id);
+
+  const addToWatchlist = async () => {
+    const movieRef = doc(db, 'watchlist', user.uid);
+
+    try {
+      await setDoc(movieRef, {
+        movies: watchlist ? [...watchlist, content.id] : [content?.id],
+      });
+      setAlert({
+        open: true,
+        message: `${content.name} Added to the Watchlist!`,
+        type: 'success',
+      });
+    } catch (error) {
+      setAlert({
+        open: true,
+        mesage: error.message,
+        type: 'error',
+      });
+    }
+  };
+
+  const removeFromWatchList = async () => {
+    const movieRef = doc(db, 'watchlist', user.uid);
+
+    try {
+      await setDoc(
+        movieRef,
+        {
+          movies: watchlist.filter((watch) => watch !== content?.id),
+        },
+        { merge: true }
+      );
+      setAlert({
+        open: true,
+        message: `${content.name} Removed from the Watchlist!`,
+        type: 'success',
+      });
+    } catch (error) {
+      setAlert({
+        open: true,
+        mesage: error.message,
+        type: 'error',
+      });
+    }
+  };
 
   const handleOpen = () => {
     setOpen(true);
@@ -60,7 +113,7 @@ export default function ContentModal({ children, media_type, id }) {
       `https://api.themoviedb.org/3/${media_type}/${id}/videos?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`
     );
 
-    setVideo(data.results[0]?.key);
+    setMovie(data.results[0]?.key);
   };
 
   useEffect(() => {
@@ -140,10 +193,27 @@ export default function ContentModal({ children, media_type, id }) {
                     startIcon={<YouTubeIcon />}
                     color="secondary"
                     target="__blank"
-                    href={`https://www.youtube.com/watch?v=${video}`}
+                    href={`https://www.youtube.com/watch?v=${movie}`}
                   >
                     Watch the Trailer
                   </Button>
+                  {user && (
+                    <Button
+                      variant="outlined"
+                      style={{
+                        width: '100%',
+                        height: 40,
+                        backgroundColor: inWatchlist ? '#ff0000' : '#EEBC1D',
+                      }}
+                      onClick={
+                        inWatchlist ? removeFromWatchList : addToWatchlist
+                      }
+                    >
+                      {inWatchlist
+                        ? 'Remove from Watchlist'
+                        : 'Add to Watchlist'}
+                    </Button>
+                  )}
                 </div>
               </div>
             </div>
