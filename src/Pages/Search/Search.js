@@ -14,12 +14,24 @@ import CustomPagination from '../../components/Pagination/CustomPagination';
 import SingleContent from '../../components/SingleContent/SingleContent';
 import { Helmet } from 'react-helmet-async';
 
+import Checkbox from '@material-ui/core/Checkbox';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormLabel from '@material-ui/core/FormLabel';
+
 const Search = () => {
   const [type, setType] = useState(0);
   const [searchText, setSearchText] = useState('');
   const [page, setPage] = useState(1);
   const [content, setContent] = useState([]);
   const [numOfPages, setNumOfPages] = useState();
+  const [adult, setAdult] = useState(false);
+
+  const handleChange = () => {
+    setAdult(!adult);
+    console.log(adult);
+  };
 
   const darkTheme = createTheme({
     palette: {
@@ -35,7 +47,7 @@ const Search = () => {
       const { data } = await axios.get(
         `https://api.themoviedb.org/3/search/${type ? 'tv' : 'movie'}?api_key=${
           process.env.REACT_APP_API_KEY
-        }&language=en-US&query=${searchText}&page=${page}&include_adult=false`
+        }&language=en-US&query=${searchText}&page=${page}&include_adult=${adult}`
       );
       setContent(data.results);
       setNumOfPages(data.total_pages);
@@ -74,6 +86,7 @@ const Search = () => {
             <SearchIcon fontSize="large" />
           </Button>
         </div>
+
         <Tabs
           value={type}
           indicatorColor="primary"
@@ -87,8 +100,20 @@ const Search = () => {
         >
           <Tab style={{ width: '50%' }} label="Search Movies" />
           <Tab style={{ width: '50%' }} label="Search TV Series" />
+          <FormControl component="fieldset">
+            {/* <FormLabel component="legend">Search Options</FormLabel> */}
+            <FormGroup aria-label="position" row>
+              <FormControlLabel
+                control={<Checkbox color="primary" />}
+                label="Include Adult Content"
+                labelPlacement="bottom"
+                onChange={handleChange}
+              />
+            </FormGroup>
+          </FormControl>
         </Tabs>
       </ThemeProvider>
+
       <div className="trending">
         {content &&
           content.map((c) => (
