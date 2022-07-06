@@ -43,7 +43,9 @@ export default function ContentModal({ children, media_type, id }) {
   const [movie, setMovie] = useState();
 
   const { user, watchlist, setAlert } = UserState();
-  const inWatchlist = watchlist.includes(content?.original_title);
+  const inWatchlist = watchlist.includes(
+    content?.original_title || content?.original_name || content?.name
+  );
 
   const addToWatchlist = async () => {
     const movieRef = doc(db, 'watchlist', user.uid);
@@ -51,13 +53,18 @@ export default function ContentModal({ children, media_type, id }) {
     try {
       await setDoc(movieRef, {
         movies: watchlist
-          ? [...watchlist, content.original_title]
-          : [content?.original_title],
+          ? [
+              ...watchlist,
+              content.original_title || content.original_name || content.name,
+            ]
+          : [content?.original_title || content.original_name || content.name],
       });
       console.log(content);
       setAlert({
         open: true,
-        message: `${content.id} Added to the Watchlist!`,
+        message: `${
+          content.original_title || content.original_name || content.name
+        } Added to the Watchlist!`,
         type: 'success',
       });
     } catch (error) {
@@ -77,14 +84,20 @@ export default function ContentModal({ children, media_type, id }) {
         movieRef,
         {
           movies: watchlist.filter(
-            (watch) => watch !== content?.original_title
+            (watch) =>
+              watch !==
+              (content?.original_title ||
+                content?.original_name ||
+                content?.name)
           ),
         },
         { merge: true }
       );
       setAlert({
         open: true,
-        message: `${content.name} Removed from the Watchlist!`,
+        message: `${
+          content.original_title || content.original_name || content.name
+        } Removed from the Watchlist!`,
         type: 'success',
       });
     } catch (error) {
