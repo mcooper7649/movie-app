@@ -166,6 +166,7 @@ export default function UserSidebar() {
                     Watchlist
                   </span>
                   {movies.map((movie) => {
+                    console.log(watchlist);
                     console.log(movie);
                     if (watchlist.includes(movie))
                       return (

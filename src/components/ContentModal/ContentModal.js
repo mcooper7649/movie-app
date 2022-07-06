@@ -43,18 +43,21 @@ export default function ContentModal({ children, media_type, id }) {
   const [movie, setMovie] = useState();
 
   const { user, watchlist, setAlert } = UserState();
-  const inWatchlist = watchlist.includes(content?.id);
+  const inWatchlist = watchlist.includes(content?.original_title);
 
   const addToWatchlist = async () => {
     const movieRef = doc(db, 'watchlist', user.uid);
 
     try {
       await setDoc(movieRef, {
-        movies: watchlist ? [...watchlist, content.id] : [content?.id],
+        movies: watchlist
+          ? [...watchlist, content.original_title]
+          : [content?.original_title],
       });
+      console.log(content);
       setAlert({
         open: true,
-        message: `${content.name} Added to the Watchlist!`,
+        message: `${content.id} Added to the Watchlist!`,
         type: 'success',
       });
     } catch (error) {
@@ -73,7 +76,9 @@ export default function ContentModal({ children, media_type, id }) {
       await setDoc(
         movieRef,
         {
-          movies: watchlist.filter((watch) => watch !== content?.id),
+          movies: watchlist.filter(
+            (watch) => watch !== content?.original_title
+          ),
         },
         { merge: true }
       );

@@ -22,7 +22,7 @@ const UserContext = ({ children }) => {
 
       var unsubscribe = onSnapshot(movieRef, (movie) => {
         if (movie.exists()) {
-          console.log('movie added');
+          console.log('movie');
           setWatchlist(movie.data().movies);
         } else {
           console.log('No Items in Watchlist');
