@@ -5,7 +5,6 @@ import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import TvIcon from '@material-ui/icons/Tv';
 import MovieIcon from '@material-ui/icons/Movie';
 import SearchIcon from '@material-ui/icons/Search';
-import LoginIcon from '@mui/icons-material/Login';
 import WhatshotIcon from '@material-ui/icons/Whatshot';
 import { useHistory } from 'react-router-dom';
 import AuthModal from './Authentication/AuthModal';
