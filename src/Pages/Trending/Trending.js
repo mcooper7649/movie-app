@@ -39,10 +39,10 @@ const Trending = () => {
               key={c.id}
               id={c.id}
               poster={c.poster_path}
-              title={c.title || c.name}
+              title={c.title || c.name || c.original_title}
               date={c.first_air_date || c.release_date}
               media_type={c.media_type}
-              vote_average={c.vote_average}
+              vote_average={c.vote_average.toFixed(1)}
             />
           ))}
       </div>

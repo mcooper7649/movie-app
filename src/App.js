@@ -8,6 +8,7 @@ import Movies from './Pages/Movies/Movies';
 import Series from './Pages/Series/Series';
 import Search from './Pages/Search/Search';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
+import Alert from './components/Alert';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
           </Container>
         </div>
         <SimpleBottomNavigation />
+        <Alert />
       </BrowserRouter>
     </HelmetProvider>
   );

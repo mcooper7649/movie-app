@@ -222,6 +222,7 @@ export default function ContentModal({ children, media_type, id }) {
                         width: '100%',
                         height: 40,
                         backgroundColor: inWatchlist ? '#ff0000' : '#EEBC1D',
+                        marginTop: 10,
                       }}
                       onClick={
                         inWatchlist ? removeFromWatchList : addToWatchlist

@@ -51,7 +51,7 @@ const useStyles = makeStyles({
     gap: 12,
     overflowY: 'scroll',
   },
-  coin: {
+  movie: {
     padding: 10,
     borderRadius: 5,
     color: 'black',
@@ -110,7 +110,7 @@ export default function UserSidebar() {
 
       setAlert({
         open: true,
-        message: `${movie.name} Removed from the Watchlist!`,
+        message: `${movie} Removed from the Watchlist!`,
         type: 'success',
       });
     } catch (error) {
@@ -170,10 +170,14 @@ export default function UserSidebar() {
                     console.log(movie);
                     if (watchlist.includes(movie))
                       return (
-                        <div className={classes.movie}>
-                          <span>{movie}</span>
-                          <span style={{ display: 'flex', gap: 8 }}>
+                        <div key={movie.id} className={classes.movie}>
+                          <span key={movie.id}>{movie}</span>
+                          <span
+                            key={movie.id}
+                            style={{ display: 'flex', gap: 8 }}
+                          >
                             <AiFillDelete
+                              key={movie.id}
                               style={{ cursor: 'pointer' }}
                               fontSize="16"
                               onClick={() => removeFromWatchlist(movie)}
