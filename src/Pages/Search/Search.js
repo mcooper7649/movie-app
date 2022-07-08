@@ -60,7 +60,7 @@ const Search = () => {
     window.scroll(0, 0);
     fetchSearch();
     // eslint-disable-next-line
-  }, [type, page]);
+  }, [type, page, adult, searchText]);
 
   return (
     <div>
