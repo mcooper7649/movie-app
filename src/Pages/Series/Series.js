@@ -53,26 +53,28 @@ const Series = () => {
       <div className="trending">
         {content &&
           content.map((c) => (
-            <motion.div
-              whileInView={{ opacity: 1 }}
-              whileHover={{ scale: 1.03 }}
-              transition={{ duration: 0.5, type: 'tween' }}
-              key={c.id}
-            >
-              <SingleContent
+            <AnimatePresence key={c.id}>
+              <motion.div
+                whileInView={{ opacity: 1 }}
+                whileHover={{ scale: 1.03 }}
+                transition={{ duration: 0.5, type: 'tween' }}
                 key={c.id}
-                id={c.id}
-                poster={c.poster_path}
-                title={
-                  c.title?.substring(0, 20 + 1) ||
-                  c.name?.substring(0, 20 + 1) ||
-                  c.original_title?.substring(0, 20 + 1)
-                }
-                date={c.first_air_date || c.release_date}
-                media_type="tv"
-                vote_average={c.vote_average}
-              />
-            </motion.div>
+              >
+                <SingleContent
+                  key={c.id}
+                  id={c.id}
+                  poster={c.poster_path}
+                  title={
+                    c.title?.substring(0, 20 + 1) ||
+                    c.name?.substring(0, 20 + 1) ||
+                    c.original_title?.substring(0, 20 + 1)
+                  }
+                  date={c.first_air_date || c.release_date}
+                  media_type="tv"
+                  vote_average={c.vote_average}
+                />
+              </motion.div>
+            </AnimatePresence>
           ))}
       </div>
       {numOfPages > 1 && (

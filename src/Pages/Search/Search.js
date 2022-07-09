@@ -18,6 +18,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
+import { AnimatePresence, motion } from 'framer-motion/dist/framer-motion';
 
 const Search = () => {
   const [type, setType] = useState(0);
@@ -34,7 +35,7 @@ const Search = () => {
 
   const darkTheme = createTheme({
     palette: {
-      type: 'dark',
+      type: 'light',
       primary: {
         main: '#fff',
       },
@@ -69,6 +70,25 @@ const Search = () => {
         <link rel="canonical" href="https://www.mycodedojo.com/" />
       </Helmet>
       <ThemeProvider theme={darkTheme}>
+        <motion.div
+          whileInView={{ x: [-100, 0], opacity: [0, 1] }}
+          transition={{ duration: 0.5 }}
+        >
+          <span className="pageTitle">Search</span>
+          <FormControl component="fieldset">
+            {/* <FormLabel component="legend">Search Options</FormLabel> */}
+            <FormGroup aria-label="position" row>
+              <FormControlLabel
+                control={<Checkbox color="primary" />}
+                label="Include Adult Content"
+                labelPlacement="top"
+                style={{ color: 'white' }}
+                onChange={handleChange}
+              />
+            </FormGroup>
+          </FormControl>
+        </motion.div>
+
         <div className="search">
           <TextField
             style={{ flex: 1 }}
@@ -100,36 +120,33 @@ const Search = () => {
           <Tab style={{ width: '50%' }} label="Search Movies" />
           <Tab style={{ width: '50%' }} label="Search TV Series" />
         </Tabs>
-        <FormControl component="fieldset">
-          {/* <FormLabel component="legend">Search Options</FormLabel> */}
-          <FormGroup aria-label="position" row>
-            <FormControlLabel
-              control={<Checkbox color="primary" />}
-              label="Include Adult Content"
-              labelPlacement="top"
-              style={{ color: 'white' }}
-              onChange={handleChange}
-            />
-          </FormGroup>
-        </FormControl>
       </ThemeProvider>
 
       <div className="trending">
         {content &&
           content.map((c) => (
-            <SingleContent
-              key={c.id}
-              id={c.id}
-              poster={c.poster_path}
-              title={
-                c.title?.substring(0, 20 + 1) ||
-                c.name?.substring(0, 20 + 1) ||
-                c.original_title?.substring(0, 20 + 1)
-              }
-              date={c.first_air_date || c.release_date}
-              media_type={type ? 'tv' : 'movie'}
-              vote_average={c.vote_average}
-            />
+            <AnimatePresence key={c.id}>
+              <motion.div
+                whileInView={{ opacity: 1 }}
+                whileHover={{ scale: 1.03 }}
+                transition={{ duration: 0.5, type: 'tween' }}
+                key={c.id}
+              >
+                <SingleContent
+                  key={c.id}
+                  id={c.id}
+                  poster={c.poster_path}
+                  title={
+                    c.title?.substring(0, 20 + 1) ||
+                    c.name?.substring(0, 20 + 1) ||
+                    c.original_title?.substring(0, 20 + 1)
+                  }
+                  date={c.first_air_date || c.release_date}
+                  media_type={type ? 'tv' : 'movie'}
+                  vote_average={c.vote_average}
+                />
+              </motion.div>
+            </AnimatePresence>
           ))}
         {searchText &&
           !content &&
