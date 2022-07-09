@@ -63,7 +63,11 @@ const Movies = () => {
                 key={c.id}
                 id={c.id}
                 poster={c.poster_path}
-                title={c.title || c.name}
+                title={
+                  c.title?.substring(0, 20 + 1) ||
+                  c.name?.substring(0, 20 + 1) ||
+                  c.original_title?.substring(0, 20 + 1)
+                }
                 date={c.first_air_date || c.release_date}
                 media_type="movie"
                 vote_average={c.vote_average}

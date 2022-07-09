@@ -4,7 +4,7 @@ import { createTheme, ThemeProvider } from '@material-ui/core';
 
 const darkTheme = createTheme({
   palette: {
-    type: 'dark',
+    type: 'light',
   },
 });
 
@@ -32,6 +32,9 @@ export default function CustomPagination({ setPage, numOfPages = 10 }) {
           color="primary"
           hideNextButton
           hidePrevButton
+          size="large"
+          variant="text"
+          shape="rounded"
         />
       </ThemeProvider>
     </div>
