@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import CustomPagination from '../../components/Pagination/CustomPagination';
 import useGenre from '../../hooks/useGenre';
 import { Helmet } from 'react-helmet-async';
+import { AnimatePresence, motion } from 'framer-motion/dist/framer-motion';
 
 const Series = () => {
   const [genres, setGenres] = useState([]);
@@ -35,7 +36,12 @@ const Series = () => {
         <title>TV Series</title>
         <link rel="canonical" href="https://www.mycodedojo.com/" />
       </Helmet>
-      <span className="pageTitle">Discover TV Series</span>
+      <motion.div
+        whileInView={{ x: [-100, 0], opacity: [0, 1] }}
+        transition={{ duration: 0.5 }}
+      >
+        <span className="pageTitle">Discover TV Series</span>
+      </motion.div>
       <Genres
         type="tv"
         selectedGenres={selectedGenres}
@@ -47,15 +53,22 @@ const Series = () => {
       <div className="trending">
         {content &&
           content.map((c) => (
-            <SingleContent
+            <motion.div
+              whileInView={{ opacity: 1 }}
+              whileHover={{ scale: 1.03 }}
+              transition={{ duration: 0.5, type: 'tween' }}
               key={c.id}
-              id={c.id}
-              poster={c.poster_path}
-              title={c.title || c.name}
-              date={c.first_air_date || c.release_date}
-              media_type="tv"
-              vote_average={c.vote_average}
-            />
+            >
+              <SingleContent
+                key={c.id}
+                id={c.id}
+                poster={c.poster_path}
+                title={c.title || c.name}
+                date={c.first_air_date || c.release_date}
+                media_type="tv"
+                vote_average={c.vote_average}
+              />
+            </motion.div>
           ))}
       </div>
       {numOfPages > 1 && (
