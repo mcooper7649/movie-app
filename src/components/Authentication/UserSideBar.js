@@ -8,6 +8,8 @@ import { auth, db } from '../../firebase';
 import { AiFillDelete } from 'react-icons/ai';
 import { doc, setDoc } from 'firebase/firestore';
 
+import { AnimatePresence, motion } from 'framer-motion/dist/framer-motion';
+
 const useStyles = makeStyles({
   container: {
     width: 350,
@@ -16,6 +18,7 @@ const useStyles = makeStyles({
     display: 'flex',
     flexDirection: 'column',
     fontFamily: 'monospace',
+    backgroundColor: '#39445a',
   },
   profile: {
     flex: 1,
@@ -24,24 +27,32 @@ const useStyles = makeStyles({
     alignItems: 'center',
     gap: '20px',
     height: '92%',
+    color: 'white',
   },
   logout: {
     height: '8%',
     width: '100%',
-    backgroundColor: '#EEBC1D',
+    alignItems: 'center',
+    fontSize: '1.5rem',
+    color: 'whitesmoke',
+    fontWeight: 'bold',
+    backgroundColor: '#83b6ec',
     marginTop: 20,
+    '&:hover': {
+      background: 'red',
+    },
   },
   picture: {
     width: 200,
     height: 200,
     cursor: 'pointer',
-    backgroundColor: '#EEBC1D',
+    backgroundColor: '#83b6ec',
     objectFit: 'contain',
   },
   watchlist: {
     flex: 1,
     width: '100%',
-    backgroundColor: 'grey',
+    backgroundColor: 'lightgrey',
     borderRadius: 10,
     padding: 15,
     paddingTop: 10,
@@ -55,12 +66,16 @@ const useStyles = makeStyles({
     padding: 10,
     borderRadius: 5,
     color: 'black',
+    fontSize: '1rem',
     width: '100%',
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: '#EEBC1D',
+    backgroundColor: '#83b6ec',
     boxShadow: '0 0 3px black',
+    '&:last-child': {
+      border: 'solid 3px #cccccc',
+    },
   },
 });
 
@@ -161,28 +176,46 @@ export default function UserSidebar() {
                 >
                   {user.displayName || user.email}
                 </span>
+                <span style={{ fontSize: 15, textShadow: '0 0 5px white' }}>
+                  Watchlist
+                </span>
                 <div className={classes.watchlist}>
-                  <span style={{ fontSize: 15, textShadow: '0 0 5px black' }}>
-                    Watchlist
-                  </span>
                   {movies.map((movie) => {
                     console.log(watchlist);
                     console.log(movie);
                     if (watchlist.includes(movie))
                       return (
                         <div key={movie.id} className={classes.movie}>
-                          <span key={movie.id}>{movie}</span>
-                          <span
-                            key={movie.id}
-                            style={{ display: 'flex', gap: 8 }}
-                          >
-                            <AiFillDelete
-                              key={movie.id}
-                              style={{ cursor: 'pointer' }}
-                              fontSize="16"
-                              onClick={() => removeFromWatchlist(movie)}
-                            />
-                          </span>
+                          <AnimatePresence key={movie}>
+                            <motion.div
+                              whileInView={{ opacity: 1 }}
+                              whileHover={{ scale: 1.1 }}
+                              transition={{ duration: 0.5, type: 'tween' }}
+                              key={movie}
+                            >
+                              <span key={movie.id}>{movie}</span>
+                            </motion.div>
+                          </AnimatePresence>
+                          <AnimatePresence key={movie}>
+                            <motion.div
+                              whileInView={{ opacity: 1 }}
+                              whileHover={{ scale: 1.1 }}
+                              transition={{ duration: 0.15, type: 'tween' }}
+                              key={movie}
+                            >
+                              <span
+                                key={movie.id}
+                                style={{ display: 'flex', gap: 8 }}
+                              >
+                                <AiFillDelete
+                                  key={movie.id}
+                                  style={{ cursor: 'pointer' }}
+                                  fontSize="16"
+                                  onClick={() => removeFromWatchlist(movie)}
+                                />
+                              </span>
+                            </motion.div>
+                          </AnimatePresence>
                         </div>
                       );
                     else return <></>;
