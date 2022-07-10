@@ -6,7 +6,7 @@ import CustomPagination from '../../components/Pagination/CustomPagination';
 import { AnimatePresence, motion } from 'framer-motion/dist/framer-motion';
 import Typography from '@material-ui/core/Typography';
 
-import { Helmet } from 'react-helmet-async';
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
@@ -43,50 +43,52 @@ const Trending = () => {
   console.log(content);
   return (
     <Fragment>
-      <Helmet>
-        <title>Trending</title>
-        <link rel="canonical" href="https://www.mycodedojo.com/" />
-      </Helmet>
-      <AnimatePresence>
-        <motion.div
-          whileInView={{ x: [-100, 0], opacity: [0, 1] }}
-          transition={{ duration: 0.5 }}
-          exit={{ y: -1000 }}
-        >
-          <Typography className={classes.custom} align="center" variant="h1">
-            Trending Today
-          </Typography>
-        </motion.div>
-      </AnimatePresence>
+      <HelmetProvider>
+        <Helmet>
+          <title>Trending</title>
+          <link rel="canonical" href="https://www.mycodedojo.com/" />
+        </Helmet>
+        <AnimatePresence>
+          <motion.div
+            whileInView={{ x: [-100, 0], opacity: [0, 1] }}
+            transition={{ duration: 0.5 }}
+            exit={{ y: -1000 }}
+          >
+            <Typography className={classes.custom} align="center" variant="h1">
+              Trending Today
+            </Typography>
+          </motion.div>
+        </AnimatePresence>
 
-      <div className="trending">
-        {content &&
-          content.map((c) => (
-            <AnimatePresence key={c.id}>
-              <motion.div
-                whileInView={{ opacity: 1 }}
-                whileHover={{ scale: 1.03 }}
-                transition={{ duration: 0.5, type: 'tween' }}
-                key={c.id}
-              >
-                <SingleContent
+        <div className="trending">
+          {content &&
+            content.map((c) => (
+              <AnimatePresence key={c.id}>
+                <motion.div
+                  whileInView={{ opacity: 1 }}
+                  whileHover={{ scale: 1.03 }}
+                  transition={{ duration: 0.5, type: 'tween' }}
                   key={c.id}
-                  id={c.id}
-                  poster={c.poster_path}
-                  title={
-                    c.title?.slice(0, 20 + 1) ||
-                    c.name?.slice(0, 20 + 1) ||
-                    c.original_title?.slice(0, 20 + 1)
-                  }
-                  date={c.first_air_date || c.release_date}
-                  media_type={c.media_type}
-                  vote_average={c.vote_average.toFixed(1)}
-                />
-              </motion.div>
-            </AnimatePresence>
-          ))}
-      </div>
-      <CustomPagination setPage={setPage} />
+                >
+                  <SingleContent
+                    key={c.id}
+                    id={c.id}
+                    poster={c.poster_path}
+                    title={
+                      c.title?.slice(0, 20 + 1) ||
+                      c.name?.slice(0, 20 + 1) ||
+                      c.original_title?.slice(0, 20 + 1)
+                    }
+                    date={c.first_air_date || c.release_date}
+                    media_type={c.media_type}
+                    vote_average={c.vote_average.toFixed(1)}
+                  />
+                </motion.div>
+              </AnimatePresence>
+            ))}
+        </div>
+        <CustomPagination setPage={setPage} />
+      </HelmetProvider>
     </Fragment>
   );
 };

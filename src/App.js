@@ -15,23 +15,25 @@ function App() {
     <HelmetProvider>
       <BrowserRouter>
         <Header />
-        <Helmet>
-          <meta charSet="utf-8" />
+        <Helmet prioritizeSeoTags>
           <title>The Watchlist</title>
           <meta
             name="url"
             property="og:url"
             content="https://fascinating-duckanoo-e09707.netlify.app/"
+            data-react-helmet="true"
           />
           <meta
             name="description"
             property="og:description"
             content="The Watchlist helps manage your media intake so you don't have to."
+            data-react-helmet="true"
           />
           <meta
             name="image"
             property="og:image"
             content="https://img001.prntscr.com/file/img001/D1ou21R1SPeoZ8RcqYZTFg.png"
+            data-react-helmet="true"
           />
         </Helmet>
         <div className="App">

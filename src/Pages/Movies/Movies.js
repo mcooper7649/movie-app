@@ -4,7 +4,7 @@ import Genres from '../../components/Genres';
 import SingleContent from '../../components/SingleContent/SingleContent';
 import useGenre from '../../hooks/useGenre';
 import CustomPagination from '../../components/Pagination/CustomPagination';
-import { Helmet } from 'react-helmet-async';
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { AnimatePresence, motion } from 'framer-motion/dist/framer-motion';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
@@ -48,56 +48,58 @@ const Movies = () => {
 
   return (
     <div>
-      <Helmet>
-        <title>Movies</title>
-        <link rel="canonical" href="https://www.mycodedojo.com/" />
-      </Helmet>
-      <motion.div
-        whileInView={{ x: [-100, 0], opacity: [0, 1] }}
-        transition={{ duration: 0.5 }}
-      >
-        <Typography className={classes.custom} align="center" variant="h1">
-          Discover Movies
-        </Typography>
-      </motion.div>
-      <Genres
-        type="movie"
-        selectedGenres={selectedGenres}
-        setSelectedGenres={setSelectedGenres}
-        genres={genres}
-        setGenres={setGenres}
-        setPage={setPage}
-      />
-      <div className="trending">
-        {content &&
-          content.map((c) => (
-            <AnimatePresence key={c.id}>
-              <motion.div
-                whileInView={{ opacity: 1 }}
-                whileHover={{ scale: 1.03 }}
-                transition={{ duration: 0.5, type: 'tween' }}
-                key={c.id}
-              >
-                <SingleContent
+      <HelmetProvider>
+        <Helmet>
+          <title>Movies</title>
+          <link rel="canonical" href="https://www.mycodedojo.com/" />
+        </Helmet>
+        <motion.div
+          whileInView={{ x: [-100, 0], opacity: [0, 1] }}
+          transition={{ duration: 0.5 }}
+        >
+          <Typography className={classes.custom} align="center" variant="h1">
+            Discover Movies
+          </Typography>
+        </motion.div>
+        <Genres
+          type="movie"
+          selectedGenres={selectedGenres}
+          setSelectedGenres={setSelectedGenres}
+          genres={genres}
+          setGenres={setGenres}
+          setPage={setPage}
+        />
+        <div className="trending">
+          {content &&
+            content.map((c) => (
+              <AnimatePresence key={c.id}>
+                <motion.div
+                  whileInView={{ opacity: 1 }}
+                  whileHover={{ scale: 1.03 }}
+                  transition={{ duration: 0.5, type: 'tween' }}
                   key={c.id}
-                  id={c.id}
-                  poster={c.poster_path}
-                  title={
-                    c.title?.substring(0, 20 + 1) ||
-                    c.name?.substring(0, 20 + 1) ||
-                    c.original_title?.substring(0, 20 + 1)
-                  }
-                  date={c.first_air_date || c.release_date}
-                  media_type="movie"
-                  vote_average={c.vote_average}
-                />
-              </motion.div>
-            </AnimatePresence>
-          ))}
-      </div>
-      {numOfPages > 1 && (
-        <CustomPagination setPage={setPage} numOfPages={numOfPages} />
-      )}
+                >
+                  <SingleContent
+                    key={c.id}
+                    id={c.id}
+                    poster={c.poster_path}
+                    title={
+                      c.title?.substring(0, 20 + 1) ||
+                      c.name?.substring(0, 20 + 1) ||
+                      c.original_title?.substring(0, 20 + 1)
+                    }
+                    date={c.first_air_date || c.release_date}
+                    media_type="movie"
+                    vote_average={c.vote_average}
+                  />
+                </motion.div>
+              </AnimatePresence>
+            ))}
+        </div>
+        {numOfPages > 1 && (
+          <CustomPagination setPage={setPage} numOfPages={numOfPages} />
+        )}
+      </HelmetProvider>
     </div>
   );
 };
