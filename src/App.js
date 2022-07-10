@@ -31,7 +31,7 @@ function App() {
           <meta
             name="image"
             property="og:image"
-            content="https://img001.prntscr.com/file/img001/zrR2MSYcT9K-REVUF4vkHg.png"
+            content="https://img001.prntscr.com/file/img001/D1ou21R1SPeoZ8RcqYZTFg.png"
           />
         </Helmet>
         <div className="App">
