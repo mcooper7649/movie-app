@@ -16,10 +16,22 @@ function App() {
       <BrowserRouter>
         <Header />
         <Helmet>
+          <meta charSet="utf-8" />
           <title>The Watchlist</title>
-          <link
-            rel="canonical"
-            href="https://fascinating-duckanoo-e09707.netlify.app/"
+          <meta
+            name="url"
+            property="og:url"
+            content="https://events-project-nextjs.vercel.app/"
+          />
+          <meta
+            name="description"
+            property="og:description"
+            content="The Watchlist helps manage your media intake so you don't have to."
+          />
+          <meta
+            name="image"
+            property="og:image"
+            content="https://img001.prntscr.com/file/img001/zrR2MSYcT9K-REVUF4vkHg.png"
           />
         </Helmet>
         <div className="App">

@@ -1,6 +1,5 @@
 import React from 'react';
 import './Header.css';
-import ListSharpIcon from '@mui/icons-material/ListSharp';
 
 const Header = () => {
   return (
