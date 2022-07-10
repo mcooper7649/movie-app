@@ -21,7 +21,7 @@ function App() {
           <meta
             name="url"
             property="og:url"
-            content="https://events-project-nextjs.vercel.app/"
+            content="https://fascinating-duckanoo-e09707.netlify.app/"
           />
           <meta
             name="description"
