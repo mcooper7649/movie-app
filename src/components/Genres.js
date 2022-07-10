@@ -1,6 +1,7 @@
 import { Chip } from '@material-ui/core';
 import axios from 'axios';
 import { useEffect } from 'react';
+import { AnimatePresence, motion } from 'framer-motion/dist/framer-motion';
 
 const Genres = ({
   selectedGenres,
@@ -41,7 +42,13 @@ const Genres = ({
   }, []);
 
   return (
-    <div style={{ padding: '6px 0' }}>
+    <div
+      style={{
+        padding: '6px 0',
+        display: 'flex',
+        flexWrap: 'wrap',
+      }}
+    >
       {selectedGenres.map((genre) => (
         <Chip
           style={{ margin: 2 }}
@@ -49,19 +56,28 @@ const Genres = ({
           key={genre.id}
           color="primary"
           clickable
-          size="small"
+          size="medium"
           onDelete={() => handleRemove(genre)}
         />
       ))}
       {genres.map((genre) => (
-        <Chip
-          style={{ margin: 2 }}
-          label={genre.name}
-          key={genre.id}
-          clickable
-          size="small"
-          onClick={() => handleAdd(genre)}
-        />
+        <AnimatePresence key={genre.id}>
+          <motion.div
+            whileInView={{ opacity: 1 }}
+            whileHover={{ scale: 1.1 }}
+            transition={{ duration: 0.5, type: 'spring', stiffness: 100 }}
+            key={genre.id}
+          >
+            <Chip
+              style={{ margin: 2 }}
+              label={genre.name}
+              key={genre.id}
+              clickable
+              size="medium"
+              onClick={() => handleAdd(genre)}
+            />
+          </motion.div>
+        </AnimatePresence>
       ))}
     </div>
   );

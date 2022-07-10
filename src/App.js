@@ -16,8 +16,11 @@ function App() {
       <BrowserRouter>
         <Header />
         <Helmet>
-          <title>Entertainment Hub</title>
-          <link rel="canonical" href="https://www.mycodedojo.com/" />
+          <title>The Watchlist</title>
+          <link
+            rel="canonical"
+            href="https://fascinating-duckanoo-e09707.netlify.app/"
+          />
         </Helmet>
         <div className="App">
           <Container>

@@ -4,10 +4,25 @@ import React, { useEffect, useState, Fragment } from 'react';
 import SingleContent from '../../components/SingleContent/SingleContent';
 import CustomPagination from '../../components/Pagination/CustomPagination';
 import { AnimatePresence, motion } from 'framer-motion/dist/framer-motion';
+import Typography from '@material-ui/core/Typography';
 
 import { Helmet } from 'react-helmet-async';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles({
+  custom: {
+    color: '#39445a',
+    fontWeight: 'bold',
+    marginTop: '6rem',
+    paddingTop: '3rem',
+    fontFamily: 'Montserrat',
+    textTransform: 'uppercase',
+    fontSize: '5rem',
+  },
+});
 
 const Trending = () => {
+  const classes = useStyles();
   const [page, setPage] = useState(1);
   const [content, setContent] = useState([]);
 
@@ -38,7 +53,9 @@ const Trending = () => {
           transition={{ duration: 0.5 }}
           exit={{ y: -1000 }}
         >
-          <span className="pageTitle">Trending Today</span>
+          <Typography className={classes.custom} align="center" variant="h1">
+            Trending Today
+          </Typography>
         </motion.div>
       </AnimatePresence>
 
@@ -57,9 +74,9 @@ const Trending = () => {
                   id={c.id}
                   poster={c.poster_path}
                   title={
-                    c.title?.substring(0, 20 + 1) ||
-                    c.name?.substring(0, 20 + 1) ||
-                    c.original_title?.substring(0, 20 + 1)
+                    c.title?.slice(0, 20 + 1) ||
+                    c.name?.slice(0, 20 + 1) ||
+                    c.original_title?.slice(0, 20 + 1)
                   }
                   date={c.first_air_date || c.release_date}
                   media_type={c.media_type}

@@ -7,8 +7,23 @@ import CustomPagination from '../../components/Pagination/CustomPagination';
 import useGenre from '../../hooks/useGenre';
 import { Helmet } from 'react-helmet-async';
 import { AnimatePresence, motion } from 'framer-motion/dist/framer-motion';
+import { makeStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+
+const useStyles = makeStyles({
+  custom: {
+    color: '#39445a',
+    fontWeight: 'bold',
+    marginTop: '6rem',
+    paddingTop: '3rem',
+    fontFamily: 'Montserrat',
+    textTransform: 'uppercase',
+    fontSize: '5rem',
+  },
+});
 
 const Series = () => {
+  const classes = useStyles();
   const [genres, setGenres] = useState([]);
   const [selectedGenres, setSelectedGenres] = useState([]);
   const [page, setPage] = useState(1);
@@ -40,7 +55,9 @@ const Series = () => {
         whileInView={{ x: [-100, 0], opacity: [0, 1] }}
         transition={{ duration: 0.5 }}
       >
-        <span className="pageTitle">Discover TV Series</span>
+        <Typography className={classes.custom} align="center" variant="h1">
+          Discover TV Series
+        </Typography>
       </motion.div>
       <Genres
         type="tv"

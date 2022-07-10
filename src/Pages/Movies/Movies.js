@@ -6,8 +6,24 @@ import useGenre from '../../hooks/useGenre';
 import CustomPagination from '../../components/Pagination/CustomPagination';
 import { Helmet } from 'react-helmet-async';
 import { AnimatePresence, motion } from 'framer-motion/dist/framer-motion';
+import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles({
+  custom: {
+    color: '#39445a',
+    fontWeight: 'bold',
+    marginTop: '6rem',
+    paddingTop: '3rem',
+    fontFamily: 'Montserrat',
+    textTransform: 'uppercase',
+    fontSize: '5rem',
+  },
+});
 
 const Movies = () => {
+  const classes = useStyles();
+
   const [genres, setGenres] = useState([]);
   const [selectedGenres, setSelectedGenres] = useState([]);
   const [page, setPage] = useState(1);
@@ -40,7 +56,9 @@ const Movies = () => {
         whileInView={{ x: [-100, 0], opacity: [0, 1] }}
         transition={{ duration: 0.5 }}
       >
-        <span className="pageTitle">Discover Movies</span>
+        <Typography className={classes.custom} align="center" variant="h1">
+          Discover Movies
+        </Typography>
       </motion.div>
       <Genres
         type="movie"

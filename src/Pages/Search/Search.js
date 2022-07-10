@@ -19,8 +19,23 @@ import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import { AnimatePresence, motion } from 'framer-motion/dist/framer-motion';
+import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles';
+const useStyles = makeStyles({
+  custom: {
+    color: '#39445a',
+    fontWeight: 'bold',
+    marginTop: '6rem',
+    paddingTop: '3rem',
+    fontFamily: 'Montserrat',
+    textTransform: 'uppercase',
+    fontSize: '5rem',
+  },
+});
 
 const Search = () => {
+  const classes = useStyles();
+
   const [type, setType] = useState(0);
   const [searchText, setSearchText] = useState('');
   const [page, setPage] = useState(1);
@@ -74,7 +89,19 @@ const Search = () => {
           whileInView={{ x: [-100, 0], opacity: [0, 1] }}
           transition={{ duration: 0.5 }}
         >
-          <span className="pageTitle">Search</span>
+          <Typography className={classes.custom} align="center" variant="h1">
+            Search
+          </Typography>
+        </motion.div>
+
+        <div className="search">
+          <TextField
+            style={{ flex: 1 }}
+            className="searchBox"
+            label="Search"
+            variant="filled"
+            onChange={(e) => setSearchText(e.target.value)}
+          />
           <FormControl component="fieldset">
             {/* <FormLabel component="legend">Search Options</FormLabel> */}
             <FormGroup aria-label="position" row>
@@ -87,16 +114,6 @@ const Search = () => {
               />
             </FormGroup>
           </FormControl>
-        </motion.div>
-
-        <div className="search">
-          <TextField
-            style={{ flex: 1 }}
-            className="searchBox"
-            label="Search"
-            variant="filled"
-            onChange={(e) => setSearchText(e.target.value)}
-          />
           <Button
             onClick={fetchSearch}
             variant="contained"
