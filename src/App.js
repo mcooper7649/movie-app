@@ -26,13 +26,25 @@ function App() {
           <meta
             name="description"
             property="og:description"
-            content="The Watchlist helps manage your media intake so you don't have to."
+            content="Hate forgetting the name of a show when you finally have time to watch it? The Watchlist helps manage your media intake so you don't have to. Create an account today for free and never have to remember what to watch again!"
             data-react-helmet="true"
           />
           <meta
             name="image"
             property="og:image"
             content="https://img001.prntscr.com/file/img001/D1ou21R1SPeoZ8RcqYZTFg.png"
+            data-react-helmet="true"
+          />
+          <meta
+            name="author"
+            property="og:author"
+            content="Michael Cooper"
+            data-react-helmet="true"
+          />
+          <meta
+            name="publish_date"
+            property="og:publish_date"
+            content="2022-07-11T00:00:00-0600"
             data-react-helmet="true"
           />
         </Helmet>
