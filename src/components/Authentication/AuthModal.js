@@ -79,12 +79,12 @@ export default function AuthModal() {
       <Button
         variant="contained"
         style={{
-          width: 85,
+          width: '100%',
           height: 40,
-          marginLeft: 15,
           marginTop: 7,
           backgroundColor: '#83b6ec',
           color: 'white',
+          fontSize: 15,
           fontWeight: '800',
         }}
         onClick={handleOpen}
