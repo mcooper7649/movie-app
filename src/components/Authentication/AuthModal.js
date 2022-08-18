@@ -10,6 +10,7 @@ import GoogleButton from 'react-google-button';
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { auth } from '../../firebase';
 import { UserState } from '../../UserContext';
+import './AuthModal.css';
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -18,9 +19,9 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
   },
   paper: {
-    width: 400,
-    backgroundColor: theme.palette.grey[100],
-    color: theme.palette.grey[500],
+    width: 600,
+    backgroundColor: '#39445a',
+    color: theme.palette.grey[200],
     borderRadius: 10,
   },
   google: {
@@ -77,13 +78,13 @@ export default function AuthModal() {
   return (
     <div>
       <Button
-        variant="contained"
+        variant="outlined"
+        color="info"
         style={{
           width: '100%',
           height: 40,
           marginTop: 7,
-          backgroundColor: '#83b6ec',
-          color: 'white',
+          color: '#83b6ec',
           fontSize: 15,
           fontWeight: '800',
         }}
@@ -126,8 +127,16 @@ export default function AuthModal() {
             <Box className={classes.google}>
               <span>OR</span>
               <GoogleButton
-                style={{ width: '100%', outline: 'none' }}
+                style={{
+                  width: '100%',
+                  outline: 'solid',
+                  color: '#39445a',
+                  fontSize: 18,
+                  fontWeight: 800,
+                }}
+                className="googleBtn"
                 onClick={signInWithGoogle}
+                type="light"
               ></GoogleButton>
             </Box>
           </div>

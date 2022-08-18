@@ -159,7 +159,6 @@ export default function ContentModal({ children, media_type, id }) {
         className={classes.modal}
         open={open}
         onClose={handleClose}
-        closeAfterTransition
         BackdropComponent={Backdrop}
         BackdropProps={{
           timeout: 500,
@@ -210,7 +209,7 @@ export default function ContentModal({ children, media_type, id }) {
                   </div>
 
                   <Button
-                    variant="contained"
+                    variant="outlined"
                     startIcon={<YouTubeIcon />}
                     style={{
                       marginTop: 10,
@@ -223,16 +222,15 @@ export default function ContentModal({ children, media_type, id }) {
                     target="__blank"
                     href={`https://www.youtube.com/watch?v=${movie}`}
                   >
-                    Watch the Trailer
+                    Watch Trailer
                   </Button>
                   {user ? (
                     <Button
-                      variant="outlined"
+                      variant={inWatchlist ? 'contained' : 'outlined'}
                       startIcon={inWatchlist ? <RemoveIcon /> : <AddIcon />}
                       style={{
                         width: '100%',
                         height: 40,
-                        backgroundColor: inWatchlist ? '#ff0000' : '#EEBC1D',
                         marginTop: 10,
                         fontSize: 20,
                         fontWeight: 800,
